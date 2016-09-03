@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/youtube"
+            android:title="Youtube" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/facebook"
+            android:title="facebook" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/android"
+            android:title="android" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/github"
+            android:title="gitHub" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/apple"
+                android:title="apple" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/googleplus"
+                android:title="google" />
+        </menu>
+    </item>
+
+</menu>
