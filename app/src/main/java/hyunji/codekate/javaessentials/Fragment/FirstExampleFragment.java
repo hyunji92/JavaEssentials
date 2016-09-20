@@ -10,9 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import hyunji.codekate.javaessentials.R;
+import hyunji.codekate.javaessentials.adapter.BaseAdapter;
+import hyunji.codekate.javaessentials.vo.AppInfo;
+
 
 /**
  * Created by hyunji on 2016. 9. 3..
@@ -21,8 +26,9 @@ import hyunji.codekate.javaessentials.R;
 public class FirstExampleFragment extends Fragment {
 
     @BindView(R.id.content_recyclerView)
-    RecyclerView recyclerView;
+    RecyclerView mRecyclerView;
 
+    private BaseAdapter mAdapter;
 
     private Context context = null;
     public FirstExampleFragment() {
@@ -36,7 +42,10 @@ public class FirstExampleFragment extends Fragment {
         //((AppCompatActivity)getActivity()).setSupportActionBar(toolBar);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new BaseAdapter(new ArrayList<AppInfo>(), R.layout.applications_list_item);
+        mRecyclerView.setAdapter(mAdapter);
 
         return view;
     }

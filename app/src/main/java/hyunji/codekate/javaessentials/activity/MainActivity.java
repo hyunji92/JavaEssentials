@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import hyunji.codekate.javaessentials.Fragment.FirstExampleFragment;
 import hyunji.codekate.javaessentials.R;
 
+
 public class MainActivity extends AppCompatActivity {
 
 
