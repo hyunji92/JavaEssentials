@@ -2,6 +2,7 @@ package hyunji.codekate.javaessentials.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -16,7 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +30,7 @@ import butterknife.ButterKnife;
 import hyunji.codekate.javaessentials.R;
 import hyunji.codekate.javaessentials.adapter.BaseAdapter;
 import hyunji.codekate.javaessentials.app.App;
+import hyunji.codekate.javaessentials.app.ApplicationsList;
 import hyunji.codekate.javaessentials.utils.Utils;
 import hyunji.codekate.javaessentials.vo.AppInfo;
 import hyunji.codekate.javaessentials.vo.AppInfoRich;
@@ -56,7 +62,7 @@ public class FirstExampleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return  inflater.inflate(R.layout.fragment_first, container, false);
+        return inflater.inflate(R.layout.fragment_first, container, false);
 
     }
 
@@ -99,6 +105,7 @@ public class FirstExampleFragment extends Fragment {
                     public void onCompleted() {
                         Toast.makeText(getActivity(), "Here is the list!", Toast.LENGTH_LONG).show();
                     }
+
                     //1. 데이터가 들어오면 프로그레스 바를 숨기고 데이터를 리스트에 추가한다.
                     //2. 리스트를 출력한다.
                     //3. 에러가발생할 경우는 Toast창을 띄운다.
@@ -119,6 +126,16 @@ public class FirstExampleFragment extends Fragment {
     }
 
     private void storeList(List<AppInfo> appInfos) {
+        ApplicationsList.getInstance().setList(appInfos);
+
+        Schedulers.io().createWorker().schedule(() -> {
+            SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+            Type appInfoType = new TypeToken<List<AppInfo>>() {
+            }.getType();
+            sharedPreferences.edit().putString("APPS", new Gson().toJson(appInfos, appInfoType)).apply();
+
+        });
+
     }
 
     private Observable<AppInfo> getApps() {
@@ -139,13 +156,13 @@ public class FirstExampleFragment extends Fragment {
                 String iconPath = mFilesDir + "/" + name;
                 Utils.storeBitmap(App.instance, icon, name);
 
-                if(subscriber.isUnsubscribed()){
+                if (subscriber.isUnsubscribed()) {
                     return;
                 }
                 subscriber.onNext(new AppInfo(name, iconPath, appinfo.getLastUpdateTime()));
             }
 
-            if(!subscriber.isUnsubscribed()){
+            if (!subscriber.isUnsubscribed()) {
                 subscriber.onCompleted();
             }
 
@@ -159,4 +176,10 @@ public class FirstExampleFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+    }
 }
+
+
