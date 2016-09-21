@@ -35,6 +35,22 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseAdapter.ViewHolder> {
         mRowLayout = rowLayout;
     }
 
+
+    public void addApplication(List<AppInfo> appInfos) {
+
+        mAppInfoList.clear();
+        mAppInfoList.addAll(appInfos);
+        notifyDataSetChanged();
+    }
+
+    public void addApplication(int position, AppInfo appInfo) {
+        if (position < 0) {
+            position = 0;
+        }
+        mAppInfoList.add(position, appInfo);
+        notifyItemInserted(position);
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(mRowLayout, viewGroup, false);
