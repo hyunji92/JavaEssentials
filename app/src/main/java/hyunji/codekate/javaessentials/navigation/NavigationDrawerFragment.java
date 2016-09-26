@@ -31,4 +31,11 @@ public class NavigationDrawerFragment extends Fragment implements  NavigationDra
 
     public void setup(int fragment_drawer, DrawerLayout mDrawerLayout, Toolbar mToolbar) {
     }
+
+    public boolean isDrawerOpen() {
+        return  true;
+    }
+
+    public void closeDrawer() {
+    }
 }
