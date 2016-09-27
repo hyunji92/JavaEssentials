@@ -1,6 +1,5 @@
 package hyunji.codekate.javaessentials.navigation;
 
-import android.support.design.internal.NavigationMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +15,12 @@ import hyunji.codekate.javaessentials.R;
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.ViewHolder>{
 
-    private List<NavigationMenu> mData;
+    private List<NavigationItem> mData;
     private NavigationDrawerCallbacks mNavigationDrawerCallbacks;
+    private int mSelectedPosition;
 
-    public NavigationDrawerAdapter(List<NavigationMenu> navigationMenus) {
-        mData =  navigationMenus;
+    public NavigationDrawerAdapter(List<NavigationItem> navigationItems) {
+        mData =  navigationItems;
     }
 
     @Override
@@ -41,6 +41,13 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     public void setNavigationDrawerCallbacks(NavigationDrawerCallbacks navigationDrawerCallbacks) {
         mNavigationDrawerCallbacks = navigationDrawerCallbacks;
 
+    }
+
+    public void selectPosition(int position) {
+        int lastPosition = mSelectedPosition;
+        mSelectedPosition = position;
+        notifyItemChanged(lastPosition);
+        notifyItemChanged(position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
