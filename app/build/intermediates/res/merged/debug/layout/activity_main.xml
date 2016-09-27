@@ -30,13 +30,14 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/activity_main_drawer" />-->
+        app:menu="@menu/activity_main_drawer" />
+        android:name="hyunji.codekate.javaessentials.navigation.NavigationDrawerFragment"-->
     <fragment
         android:id="@+id/fragment_drawer"
-        android:name="hyunji.codekate.javaessentials.navigation.NavigationDrawerFragment"
         android:layout_width="240dp"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
+        
+        android:name="hyunji.codekate.javaessentials.navigation.NavigationDrawerFragment"
         app:layout="@layout/fragment_navigation_drawer"/>
 
 </android.support.v4.widget.DrawerLayout>
