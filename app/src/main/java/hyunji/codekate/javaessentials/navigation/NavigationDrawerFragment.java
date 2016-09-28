@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import hyunji.codekate.javaessentials.R;
 
 
@@ -28,8 +27,8 @@ import hyunji.codekate.javaessentials.R;
  */
 public class NavigationDrawerFragment extends Fragment implements  NavigationDrawerCallbacks{
 
-    @BindView(R.id.drawerList)
-    RecyclerView mDrawerList;
+    //@BindView(R.id.drawerList)
+    private RecyclerView mDrawerList;
 
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
@@ -51,6 +50,7 @@ public class NavigationDrawerFragment extends Fragment implements  NavigationDra
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view =  inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        mDrawerList = (RecyclerView) view.findViewById(R.id.drawerList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 

@@ -36,7 +36,6 @@ import hyunji.codekate.javaessentials.vo.AppInfo;
 import hyunji.codekate.javaessentials.vo.AppInfoRich;
 import rx.Observable;
 import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
@@ -46,7 +45,7 @@ import rx.schedulers.Schedulers;
 
 public class FirstExampleFragment extends Fragment {
 
-    @BindView(R.id.content_recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
     @BindView(R.id.fragment_first_example_swipe_container)
@@ -62,7 +61,7 @@ public class FirstExampleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        return inflater.inflate(R.layout.content_recyclerview, container, false);
 
     }
 
@@ -87,13 +86,13 @@ public class FirstExampleFragment extends Fragment {
         mSwipeRefreshLayout.setRefreshing(true);
         mRecyclerView.setVisibility(View.GONE);
 
-        getFileDir()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(file -> {
-                    mFilesDir = file;
-                    refreshTheList();
-                });
+//        getFileDir()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(file -> {
+//                    mFilesDir = file;
+//                    refreshTheList();
+//                });
     }
 
     private void refreshTheList() {

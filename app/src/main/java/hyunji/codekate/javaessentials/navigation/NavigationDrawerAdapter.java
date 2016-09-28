@@ -76,16 +76,13 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
     private void touchPosition(int position) {
         int lastPosition = mTouchedPosition;
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-
-    public void setNavigationDrawerCallbacks(NavigationDrawerCallbacks navigationDrawerCallbacks) {
-        mNavigationDrawerCallbacks = navigationDrawerCallbacks;
+        mTouchedPosition = position;
+        if(lastPosition >=0){
+            notifyDataSetChanged();
+        }
+        if(position >=0){
+            notifyDataSetChanged();
+        }
 
     }
 
@@ -94,6 +91,17 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         mSelectedPosition = position;
         notifyItemChanged(lastPosition);
         notifyItemChanged(position);
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return mData != null ? mData.size() : 0;
+    }
+
+    public void setNavigationDrawerCallbacks(NavigationDrawerCallbacks navigationDrawerCallbacks) {
+        mNavigationDrawerCallbacks = navigationDrawerCallbacks;
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
