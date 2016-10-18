@@ -14,6 +14,11 @@ buildscript {
     }
 }
 
+repositories {
+    mavenCentral()
+    maven { url "https://github.com/alter-ego/advanced-android-logger/raw/develop/releases/" }
+}
+
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
@@ -62,6 +67,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.2.0'
     compile 'com.android.support:cardview-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
+    compile 'com.alterego:advancedandroidlogger:1.0.7@aar'
 
     provided 'org.projectlombok:lombok:1.16.8'
     provided 'org.glassfish:javax.annotation:10.0-b28'

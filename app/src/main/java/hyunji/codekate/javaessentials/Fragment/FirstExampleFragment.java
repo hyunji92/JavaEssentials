@@ -36,6 +36,7 @@ import hyunji.codekate.javaessentials.vo.AppInfo;
 import hyunji.codekate.javaessentials.vo.AppInfoRich;
 import rx.Observable;
 import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
@@ -86,13 +87,13 @@ public class FirstExampleFragment extends Fragment {
         mSwipeRefreshLayout.setRefreshing(true);
         mRecyclerView.setVisibility(View.GONE);
 
-//        getFileDir()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(file -> {
-//                    mFilesDir = file;
-//                    refreshTheList();
-//                });
+        getFileDir()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(file -> {
+                    mFilesDir = file;
+                    refreshTheList();
+                });
     }
 
     private void refreshTheList() {
@@ -105,6 +106,7 @@ public class FirstExampleFragment extends Fragment {
                         Toast.makeText(getActivity(), "Here is the list!", Toast.LENGTH_LONG).show();
                     }
 
+                    // Scheduler.Worker thread. Add `onError` handling.
                     //1. 데이터가 들어오면 프로그레스 바를 숨기고 데이터를 리스트에 추가한다.
                     //2. 리스트를 출력한다.
                     //3. 에러가발생할 경우는 Toast창을 띄운다.
@@ -153,7 +155,9 @@ public class FirstExampleFragment extends Fragment {
                 Bitmap icon = Utils.drawableToBitmap(appinfo.getIcon());
                 String name = appinfo.getName();
                 String iconPath = mFilesDir + "/" + name;
+                // 여기 error
                 Utils.storeBitmap(App.instance, icon, name);
+                // 여기 error
 
                 if (subscriber.isUnsubscribed()) {
                     return;
@@ -171,6 +175,7 @@ public class FirstExampleFragment extends Fragment {
     private Observable<File> getFileDir() {
         return Observable.create(subscriber -> {
             subscriber.onNext(App.instance.getFilesDir());
+            // 여기 error
             subscriber.onCompleted();
         });
     }
@@ -180,5 +185,4 @@ public class FirstExampleFragment extends Fragment {
         super.onDestroyView();
     }
 }
-
 

@@ -17,7 +17,7 @@ import hyunji.codekate.javaessentials.navigation.NavigationDrawerFragment;
 
 public class MainActivity extends AppCompatActivity  implements NavigationDrawerCallbacks {
 
-    @BindView(R.id.toolbar)
+    @BindView(R.id.toolbar_actionbar)
     Toolbar mToolbar;
 
     @BindView(R.id.drawer_layout)
