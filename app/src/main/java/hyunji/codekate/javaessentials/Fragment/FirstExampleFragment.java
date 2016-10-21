@@ -154,6 +154,7 @@ public class FirstExampleFragment extends Fragment {
             for (AppInfoRich appinfo : apps) {
                 Bitmap icon = Utils.drawableToBitmap(appinfo.getIcon());
                 String name = appinfo.getName();
+                //String appPath = App.getApp().getApplicationContext().getFilesDir().getAbsolutePath();
                 String iconPath = mFilesDir + "/" + name;
                 // 여기 error
                 Utils.storeBitmap(App.instance, icon, name);
@@ -174,7 +175,8 @@ public class FirstExampleFragment extends Fragment {
 
     private Observable<File> getFileDir() {
         return Observable.create(subscriber -> {
-            subscriber.onNext(App.instance.getFilesDir());
+            //String appPath = App.instance.getApplicationContext().getFilesDir().getAbsolutePath();
+            subscriber.onNext(App.instance.getFilesDir());//App.instance.getFilesDir()
             // 여기 error
             subscriber.onCompleted();
         });
